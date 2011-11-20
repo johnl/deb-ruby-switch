@@ -29,45 +29,6 @@ def usage(exitstatus)
   exit(exitstatus)
 end
 
-require 'getoptlong'
-opts = GetoptLong.new(
-  [ '--list', '-l', GetoptLong::NO_ARGUMENT ],
-  [ '--check', '-c', GetoptLong::NO_ARGUMENT ],
-  [ '--set', '-s', GetoptLong::REQUIRED_ARGUMENT ],
-  [ '--auto', '-a', GetoptLong::NO_ARGUMENT ],
-  [ '--help', '-h', GetoptLong::NO_ARGUMENT ]
-)
-
-command = nil
-chosen_interpreter = nil
-begin
-  opts.each do |opt,arg|
-    case opt
-    when '--help'
-      usage(0)
-    when '--list'
-      usage(1) if command
-      command = :list
-    when '--check'
-      usage(1) if command
-      command = :check
-    when '--set'
-      command = :set
-      chosen_interpreter = arg
-    when '--auto'
-      usage(1) if command
-      command = :auto
-    else
-      usage(1)
-    end
-  end
-rescue GetoptLong::InvalidOption => e
-  usage(1)
-end
-if ARGV.size != 0 || command.nil?
-  usage(1)
-end
-
 def list(arg = nil)
   puts ALTERNATIVES.keys.sort
 end
@@ -130,6 +91,45 @@ end
 def auto(arg = nil)
   system('update-alternatives --auto ruby')
   system('update-alternatives --auto gem')
+end
+
+require 'getoptlong'
+opts = GetoptLong.new(
+  [ '--list', '-l', GetoptLong::NO_ARGUMENT ],
+  [ '--check', '-c', GetoptLong::NO_ARGUMENT ],
+  [ '--set', '-s', GetoptLong::REQUIRED_ARGUMENT ],
+  [ '--auto', '-a', GetoptLong::NO_ARGUMENT ],
+  [ '--help', '-h', GetoptLong::NO_ARGUMENT ]
+)
+
+command = nil
+chosen_interpreter = nil
+begin
+  opts.each do |opt,arg|
+    case opt
+    when '--help'
+      usage(0)
+    when '--list'
+      usage(1) if command
+      command = :list
+    when '--check'
+      usage(1) if command
+      command = :check
+    when '--set'
+      command = :set
+      chosen_interpreter = arg
+    when '--auto'
+      usage(1) if command
+      command = :auto
+    else
+      usage(1)
+    end
+  end
+rescue GetoptLong::InvalidOption => e
+  usage(1)
+end
+if ARGV.size != 0 || command.nil?
+  usage(1)
 end
 
 send(command, chosen_interpreter)
