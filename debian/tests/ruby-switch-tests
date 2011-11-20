@@ -7,7 +7,12 @@ setup() {
 }
 
 teardown() {
-  ruby-switch --set "$original_ruby"
+  ruby_switch "$original_ruby"
+}
+
+ruby_switch() {
+  choice="$1"
+  ruby-switch --set "$choice" > /dev/null
 }
 
 failed=false
@@ -26,12 +31,11 @@ do_test() {
 
 setup
 
-ruby-switch --set ruby1.8
-
+ruby_switch ruby1.8
 do_test "ruby1.8's ruby" ruby ruby1.8
 do_test "ruby1.8's gem" gem gem1.8
 
-ruby-switch --set ruby1.9.1
+ruby_switch ruby1.9.1
 do_test "ruby1.9.1's ruby" ruby ruby1.9.1
 do_test "ruby1.9.1's gem" gem gem1.9.1
 
