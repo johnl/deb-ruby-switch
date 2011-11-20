@@ -6,14 +6,21 @@ Uploaders: Antonio Terceiro <terceiro@debian.org>
 DM-Upload-Allowed: yes
 Build-Depends: debhelper (>= 7.0.50~), gem2deb (>= 0.2.11~)
 Standards-Version: 3.9.2
-#Vcs-Git: git://git.debian.org/pkg-ruby-extras/ruby-switch.git
-#Vcs-Browser: http://git.debian.org/?p=pkg-ruby-extras/ruby-switch.git;a=summary
-Homepage: FIXME
+Vcs-Git: git://git.debian.org/pkg-ruby-extras/ruby-switch.git
+Vcs-Browser: http://git.debian.org/?p=pkg-ruby-extras/ruby-switch.git;a=summary
+Homepage: http://wiki.debian.org/Ruby
 XS-Ruby-Versions: all
 
 Package: ruby-switch
 Architecture: all
 XB-Ruby-Versions: ${ruby:Versions}
 Depends: ${shlibs:Depends}, ${misc:Depends}, ruby | ruby-interpreter
-Description: FIXME
- <insert long description, indented with spaces>
+Description: switch between different Ruby interpreters
+ ruby-switch allows system administrators to easily switch between different
+ Ruby interpreters as the system-wide default Ruby. When switching, all the
+ entries in the alternatives database are changed, including but not limited to
+ "ruby", "irb" and "gem".
+ .
+ Note that ruby-switch helps sysadmins change the system-wide default Ruby, and
+ requires root privileges. For letting users choose between the different Ruby
+ implementations available in Debian, use the rbenv package instead.
