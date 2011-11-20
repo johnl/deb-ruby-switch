@@ -1,0 +1,42 @@
+#!/bin/sh
+
+set -e
+
+setup() {
+  original_ruby=$(readlink -f /usr/bin/ruby | xargs basename)
+}
+
+teardown() {
+  ruby-switch --set "$original_ruby"
+}
+
+failed=false
+do_test() {
+  message="$1"
+  interface="$2"
+  implementation="$3"
+  if test "$(readlink -f /usr/bin/$interface | xargs basename)" = "$implementation"; then
+    echo "✔ $message"
+  else
+    printf "\033[31;40m✖ $message\033[m"
+    echo
+    failed=true
+  fi
+}
+
+setup
+
+ruby-switch --set ruby1.8
+
+do_test "ruby1.8's ruby" ruby ruby1.8
+do_test "ruby1.8's gem" gem gem1.8
+
+ruby-switch --set ruby1.9.1
+do_test "ruby1.9.1's ruby" ruby ruby1.9.1
+do_test "ruby1.9.1's gem" gem gem1.9.1
+
+teardown
+
+if test "$failed" != 'false'; then
+  echo "** $0: one or more tests failed!"
+fi
