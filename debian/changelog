@@ -1,5 +1,5 @@
-ruby-switch (0.1.0) UNRELEASED; urgency=low
+ruby-switch (0.1.0) unstable; urgency=low
 
   * Initial release.
 
- -- Antonio Terceiro <terceiro@debian.org>  Sun, 20 Nov 2011 18:33:05 -0200
+ -- Antonio Terceiro <terceiro@debian.org>  Fri, 30 Dec 2011 00:58:20 -0200
