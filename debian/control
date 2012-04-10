@@ -9,6 +9,7 @@ Standards-Version: 3.9.2
 Vcs-Git: git://git.debian.org/pkg-ruby-extras/ruby-switch.git
 Vcs-Browser: http://git.debian.org/?p=pkg-ruby-extras/ruby-switch.git;a=summary
 Homepage: http://wiki.debian.org/Ruby
+XS-Ruby-Versions: all
 
 Package: ruby-switch
 Architecture: all
