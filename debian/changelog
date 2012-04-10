@@ -1,3 +1,9 @@
+ruby-switch (0.1.0bbox1) lucid; urgency=low
+
+  * Backported to Ubuntu Lucid
+
+ -- John Leach <john@brightbox.co.uk>  Tue, 10 Apr 2012 15:27:19 +0100
+
 ruby-switch (0.1.0) unstable; urgency=low
 
   * Initial release.
